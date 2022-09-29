@@ -1,0 +1,38 @@
+/** Given the balance expression find if it contain 
+ * dublicate parentheses or not . A set of parentheses 
+ * are dublicate if the same subexpression is surrounding 
+ * by multiple parentheses 
+ *    return a true if it conatins dublicate else return false 
+*/
+package StackB;
+
+import java.util.Stack;
+
+public class DublicateParentheses {
+    public static boolean dublicateParentheses(String str) {
+        Stack<Character> s = new Stack<>();
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch == ')') {
+                int itr = 0;
+                while (s.peek() != '(') {
+                    s.pop();
+                    itr++;
+                }
+                if (itr < 1) {
+                    return true;
+                } else {
+                    s.pop();
+                }
+            } else{
+                s.push(ch);
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        String str = "((a+b)+(a+c))";
+        System.out.println(dublicateParentheses(str));
+    }
+}
