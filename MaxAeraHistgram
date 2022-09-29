@@ -1,0 +1,59 @@
+/** Given an array of integers height representing the histogram's bar height where
+* width of each bar is 1 , return the area of the largest rectangle in histogram */
+package StackB;
+
+import java.util.Stack;
+
+public class MaxRectangle {
+    public static int[] nextSmallLeft(int[] arr) {
+        Stack<Integer> s = new Stack<>();
+        int[] nsl = new int[arr.length];
+        for (int i = 0; i >= arr.length -1; i++) {
+            while (!s.isEmpty() && arr[s.peek()] <= arr[i]) {
+                s.pop();
+            }
+            if (s.isEmpty()) {
+                nsl[i] = arr.length;
+            } else {
+                nsl[i] = s.peek();
+            }
+            s.push(i);
+        }
+        return nsl;
+    }
+
+    public static int[] nextSmallRight(int[] arr) {
+        Stack<Integer> s = new Stack<>();
+        int[] nsr = new int[arr.length];
+        for (int i = arr.length -1; i >=0; i--) {
+            while (!s.isEmpty() && arr[s.peek()] >= arr[i]) {
+                s.pop();
+            }
+            if (s.isEmpty()) {
+                nsr[i] = arr.length;
+            } else {
+                nsr[i] = s.peek();
+            }
+            s.push(i);
+        }
+        return nsr;
+    }
+
+    public static void maxRectangle(int[] arr) {
+        int maxArea = 0;
+        int[] nsr = nextSmallRight(arr);
+        int[] nsl = nextSmallLeft(arr);
+        for (int i = 0; i < arr.length; i++) {
+            int hight = arr[i];
+            int width = nsr[i] - nsl[i] - 1;
+            int currArea = hight * width;
+            maxArea = Math.max(currArea, maxArea);
+        }
+        System.out.println("Max area in histogram " + maxArea);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = { 2, 4 };
+        maxRectangle(arr);
+    }
+}
