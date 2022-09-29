@@ -1,0 +1,24 @@
+/** Revers satck */
+package StackB;
+import java.util.Stack;
+public class ReversStr {
+    public static String reversStr(String str){
+        Stack<Character> s = new Stack<>();
+        int idx =0;
+        while(idx!=str.length()){
+            char ch = str.charAt(idx);
+            s.push(ch);
+            idx++;
+        }
+        StringBuilder sb = new StringBuilder("");
+        while(!s.isEmpty()){
+           char newCh = s.pop();
+           sb.append(newCh);
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        String str = "raadhaKrishna";
+        System.out.println(reversStr(str));
+    }
+}
