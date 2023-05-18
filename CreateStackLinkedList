@@ -1,4 +1,4 @@
-/** Create Stack using linkedlist
+/** Create Stack using linkedlist */
 package StackB;
 
 public class LinkedListS {
